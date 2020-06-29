@@ -1,24 +1,47 @@
 import React from "react";
-import { BrowserRouter, Route } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 
-import Home from "./todos/home";
-import SignUp from "./todos/signup";
-import SignIn from "./todos/signin";
+import BeforeHeader from "./Header/BeforeHeader";
+import AfterHeader from "./Header/AfterHeader";
+import Home from "./Routes/home";
+import SignUp from "./Routes/signup";
+import SignIn from "./Routes/signin";
+import Create from "./Routes/create";
+import Edit from "./Routes/edit";
+import SignOut from "./Routes/signout";
 
-import Header from "./Header";
+import history from "../history";
+import { connect } from "react-redux";
 
-const App = () => {
+const App = (props) => {
+  const renderHeader = () => {
+    if (props.isSignedIn) {
+      return <AfterHeader />;
+    } else {
+      return <BeforeHeader />;
+    }
+  };
   return (
     <div className="ui container">
-      <BrowserRouter>
+      <Router history={history}>
         <div>
-          <Header />
-          <Route path="/" exact component={Home} />
-          <Route path="/signup" component={SignUp} />
-          <Route path="/signin" component={SignIn} />
+          {renderHeader()}
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route path="/signup" exact component={SignUp} />
+            <Route path="/signin" exact component={SignIn} />
+            <Route path="/signin/create" exact component={Create} />
+            <Route path="/signin/edit" exact component={Edit} />
+            <Route path="/signin/signout" exact component={SignOut} />
+          </Switch>
         </div>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 };
-export default App;
+
+const mapStateToProps = (state) => {
+  return { isSignedIn: state.auth.isSignedIn };
+};
+
+export default connect(mapStateToProps, null)(App);
