@@ -5,16 +5,16 @@ const AfterHeader = () => {
   return (
     <div className="ui secondary pointing menu">
       <Link to="/signin/create" className="ui inverted secondary button">
-        <i class="pencil alternate icon"></i>
+        <i className="pencil alternate icon"></i>
         Create
       </Link>
       <div className="right menu">
         <Link to="/signin/signout" className="ui inverted violet button">
-          <i class="sign out alternate icon"></i>
+          <i className="sign out alternate icon"></i>
           Sign Out
         </Link>
         <Link to="/signin/edit" className="ui inverted violet button">
-          <i class="edit icon"></i>
+          <i className="edit icon"></i>
           Edit
         </Link>
       </div>

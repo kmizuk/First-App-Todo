@@ -1,7 +1,11 @@
 import React from "react";
 
 const Create = () => {
-  return <div>Create</div>;
+  return (
+    <div style={{ textAlign: "center" }}>
+      <div>Create ToDo</div>
+    </div>
+  );
 };
 
 export default Create;
